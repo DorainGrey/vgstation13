@@ -26,15 +26,33 @@ var/list/doppler_arrays = list()
 	//user.set_machine(src)
 	ui_interact(user)
 
+/obj/machinery/computer/bhangmeter/proc/openHolomap(var/mob/user)
+	var/z_level = 1
+	var/holomap_bgmap = "cmc_\ref[src]_\ref[user]_[z_level]"
+	var/image/background = image('icons/480x480.dmi', "stationmap_blue")
+	var/image/station_outline = image(holoMiniMaps[z_level])
+	station_outline.color = "#DEE7FF"
+	station_outline.alpha = 200
+	var/image/station_areas = image(extraMiniMaps[HOLOMAP_EXTRA_STATIONMAPAREAS+"_[z_level]"])
+	station_areas.alpha = 150
+	background.overlays += station_areas
+	background.overlays += station_outline
+	background.alpha = 0
+	background.plane = HUD_PLANE
+	background.layer = HUD_BASE_LAYER
+	holomap_cache[holomap_bgmap] = background
+
+
+/obj/machinery/computer/bhangmeter/Topic(href, href_list)
+	to_chat(usr, "YESYEYSYYSYS")
+	openHolomap()
+	return 1
+
+
+
 /obj/machinery/computer/bhangmeter/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open=NANOUI_FOCUS)
 	if(stat & (BROKEN|NOPOWER|FORCEDISABLE))
 		return
-
-	if(user.client)
-		for (var/z = 1 to world.maxz)
-			if(z == map.zCentcomm)
-				continue
-			user.client << browse_rsc(file("[getMinimapFile(z)].png"), "[map.nameShort][z].png")
 
 	var/list/data[0]
 	var/list/explosions = list()
@@ -62,14 +80,8 @@ var/list/doppler_arrays = list()
 	if(!ui)
 		//The ui does not exist, so we'll create a new one
 		ui = new(user, src, ui_key, "bhangmeter.tmpl", name, 900, 800)
-		//Adding a template with the key "mapContent" enables the map ui functionality
-		ui.add_template("mapContent", "bhangmeter_map_content.tmpl")
-		//Adding a template with the key "mapHeader" replaces the map header content
-		ui.add_template("mapHeader", "bhangmeter_map_header.tmpl")
 		//When the UI is first opened this is the data it will use
 		//We want to show the map by default
-		ui.set_show_map(1)
-
 		ui.set_initial_data(data)
 
 		ui.open()
