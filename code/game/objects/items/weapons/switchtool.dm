@@ -103,6 +103,16 @@
 	else
 		return ..()
 
+/obj/item/weapon/switchtool/MouseWheeled(var/mob/user, var/delta_x, var/delta_y, var/params)
+	var/modifiers = params2list(params)
+	if (modifiers["ctrl"])
+		var/index = 1
+		if (delta_y <= 0)
+			index = 0
+		else
+			index = 2
+		edit_deploy(index)
+
 /obj/item/weapon/switchtool/proc/get_module_type(var/module)
 	return copytext(module, 1, findtext(module, ":"))
 
