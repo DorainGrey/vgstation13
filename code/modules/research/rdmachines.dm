@@ -203,6 +203,9 @@ var/global/list/rnd_machines = list()
 		icon_state = "[base_state]"
 
 		var/datum/material/material = materials.getMaterial(found)
+		if(material = 0)
+			// Material is not accepted in this machine.
+			return 1
 		materials.addAmount(found, amount * material.cc_per_sheet)
 		spawn(ANIM_LENGTH)
 			busy = FALSE
