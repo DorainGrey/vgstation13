@@ -109,7 +109,7 @@
 		if (istype(AM,/obj/item/stack))
 			var/obj/item/stack/ST = AM
 			if(ST.amount > 1)
-				new ST.type (src)
+				new ST.type (src,amount=1)
 				ST.use(1)
 				if(CAN_AUTOMAKE_SOMETHING)
 					cook()
@@ -201,7 +201,7 @@
 		if (istype(O,/obj/item/stack))
 			var/obj/item/stack/ST = O
 			if(ST.amount > 1)
-				new ST.type (src)
+				new ST.type (src,amount=1)
 				ST.use(1)
 				user.visible_message( \
 					"<span class='notice'>[user] adds one of [O] to [src].</span>", \
@@ -489,6 +489,7 @@
 		return
 	for (var/obj/O in contents)
 		O.forceMove(src.loc)
+		O.update_icon()
 	if (src.reagents.total_volume)
 		src.dirty++
 		if(reagent_disposal)
@@ -584,7 +585,7 @@
 			list("Examine", "radial_examine")
 		)
 
-		var/task = show_radial_menu(usr,loc,choices,custom_check = new /callback(src, src::radial_check(), user))
+		var/task = show_radial_menu(usr,loc,choices,custom_check = new /callback(src, nameof(src::radial_check()), user))
 		if(!radial_check(usr))
 			return
 

@@ -394,7 +394,7 @@ var/list/all_supply_groups = list("Supplies","Clothing","Security","Hospitality"
 /datum/supply_packs/randomised/contraband
 	num_contained = 5
 	contains = list(/obj/item/weapon/storage/pill_bottle/zoom,
-					/obj/item/weapon/storage/pill_bottle/skeet,
+					/obj/item/weapon/storage/pill_bottle/speedcrank,
 					/obj/item/weapon/storage/pill_bottle/happy,
 					/obj/item/weapon/reagent_containers/glass/bottle/pcp,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/absinthe,
@@ -762,23 +762,14 @@ var/list/all_supply_groups = list("Supplies","Clothing","Security","Hospitality"
 
 /datum/supply_packs/grey_supply
 	name = "Grey Space-Ex"
-	var/list/basic = list(
-		/obj/item/clothing/suit/space/grey,
-		/obj/item/clothing/head/helmet/space/grey,
-	)
-	var/worker = list(/obj/item/clothing/suit/space/rig/grey)
-	var/researcher = list(/obj/item/clothing/suit/space/rig/grey/researcher)
-	var/soldier = list(/obj/item/clothing/suit/space/rig/grey/soldier)
-	contains = list(/obj/item/weapon/tank/oxygen/red,
-					/obj/item/weapon/tank/emergency_oxygen/engi,
+	contains = list(/obj/item/clothing/suit/space/grey,
+					/obj/item/clothing/head/helmet/space/grey,
+					/obj/item/weapon/tank/oxygen/red,
 					/obj/item/clothing/mask/breath)
-	cost = 200
-	containertype = /obj/structure/closet/crate/basic
+	cost = 175
+	containertype = /obj/structure/closet/crate/ayy
 	containername = "grey Space-Ex crate"
 	group = "Clothing"
-
-/datum/supply_packs/grey_supply/New()
-	selection_from = list(basic, worker, researcher, soldier)
 
 /datum/supply_packs/grey_uniform
 	name = "Mothership uniforms"
@@ -798,10 +789,9 @@ var/list/all_supply_groups = list("Supplies","Clothing","Security","Hospitality"
 					/obj/item/clothing/shoes/jackboots/mothership,
 					/obj/item/clothing/shoes/jackboots/mothership)
 	cost = 50
-	containertype = /obj/structure/closet/crate/ayybin
-	containername = "mothership uniform bin"
+	containertype = /obj/structure/closet/ayy
+	containername = "mothership uniform locker"
 	group = "Clothing"
-	contraband = 1
 
 /datum/supply_packs/grey_uniform/New()
 	selection_from = list(laborer, scientist, explorer, soldier)
@@ -1064,7 +1054,7 @@ var/list/all_supply_groups = list("Supplies","Clothing","Security","Hospitality"
 					/obj/item/weapon/gun/energy/smalldisintegrator,
 					/obj/item/weapon/gun/energy/smalldisintegrator)
 	cost = 60
-	containertype = /obj/structure/closet/crate/secure/ayyweapon
+	containertype = /obj/structure/closet/crate/secure/ayy_mdf
 	containername = "MDF standard weapons crate"
 	one_access = list(access_armory, access_mothership_military)
 	group = "Security"
@@ -1120,9 +1110,19 @@ var/list/all_supply_groups = list("Supplies","Clothing","Security","Hospitality"
 					/obj/item/clothing/head/helmet/mothership,
 					/obj/item/clothing/head/helmet/mothership)
 	cost = 40
-	containertype = /obj/structure/closet/crate/secure/ayybin
-	containername = "MDF standard armor bin"
+	containertype = /obj/structure/closet/secure_closet/ayy2
+	containername = "MDF standard armor locker"
 	one_access = list(access_security, access_mothership_military)
+	group = "Security"
+	contraband = 1
+
+/datum/supply_packs/grey_rigkits2
+	name = "MDF rig parts"
+	contains = list(/obj/item/device/rigparts/ayy_soldier)
+	cost = 200
+	containertype = /obj/structure/closet/crate/secure/ayy_mdf
+	one_access = list(access_armory, access_mothership_military)
+	containername = "MDF rig parts crate"
 	group = "Security"
 	contraband = 1
 
@@ -2388,6 +2388,16 @@ var/list/all_supply_groups = list("Supplies","Clothing","Security","Hospitality"
 	containername = "hardsuit frame crate"
 	group = "Science"
 
+/datum/supply_packs/grey_rigkits
+	name = "GDR rig parts"
+	contains = list(/obj/item/device/rigparts/ayy_worker,
+					/obj/item/device/rigparts/ayy_researcher)
+	cost = 200
+	containertype = /obj/structure/closet/crate/secure/ayy_general
+	one_access = list(access_robotics, access_mothership_research)
+	containername = "GDR rig parts crate"
+	group = "Science"
+	contraband = 1
 
 //////HYDROPONICS//////
 
@@ -2887,4 +2897,13 @@ var/list/all_supply_groups = list("Supplies","Clothing","Security","Hospitality"
 	cost = 20
 	containertype = /obj/structure/stackopacks
 	containername = "\improper Meat Fridge stack of packs"
+	group = "Vending Machine packs"
+
+/datum/supply_packs/art
+	name = "Art Supply stack of packs"
+	contains = list(/obj/structure/vendomatpack/artsupply,
+					/obj/structure/vendomatpack/artsupply)
+	cost = 20
+	containertype = /obj/structure/stackopacks
+	containername = "\improper Le Patron des Arts stack of packs"
 	group = "Vending Machine packs"

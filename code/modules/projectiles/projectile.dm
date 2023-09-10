@@ -9,7 +9,6 @@
 #define SET "set"
 */
 
-var/list/bullet_master = list()
 var/list/impact_master = list()
 
 /obj/item/projectile
@@ -857,4 +856,7 @@ var/list/impact_master = list()
 	color = proj_color
 
 /obj/item/projectile/proc/apply_projectile_color_shift(var/proj_color_shift)
+	return
+
+/obj/item/projectile/proc/teleport_act()
 	return

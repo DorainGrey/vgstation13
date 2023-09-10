@@ -48,7 +48,6 @@
 #define REV "revolutionary"
 #define WIZAPP_MASTER "wizard's master"
 #define WIZAPP "wizard's apprentice"
-#define WIZARD_CONVERT "wizard's faction convert"
 #define MADMONKEY "monkey fever infected"
 #define NINJA "Space Ninja"
 #define WISHGRANTERAVATAR "avatar of the Wish Granter"
@@ -97,6 +96,8 @@
 #define GREET_CUSTOM		"custom"
 #define GREET_MIDROUND		"midround"
 #define GREET_MASTER		"master"
+#define GREET_RIGHTANDWRONG	"rightandwrong"
+#define GREET_MADNESSSURVIVOR		"madnesssurvivor"
 
 #define GREET_AUTOTATOR		"autotator"
 #define GREET_SYNDBEACON	"syndbeacon"
@@ -287,3 +288,7 @@
 
 #define BASE_RULESET_WEIGHT 10
 #define ADDITIONAL_RULESET_WEIGHT 1.4
+
+#define ANTAG_MADNESS_OFF		0
+#define ANTAG_MADNESS_EARLY		1
+#define ANTAG_MADNESS_LATE		2

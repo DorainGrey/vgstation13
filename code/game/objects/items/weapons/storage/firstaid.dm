@@ -359,6 +359,9 @@ var/global/list/bottle_colour_choices = list("Blue" = "#0094FF","Dark Blue" = "#
 	items_to_spawn = list(/obj/item/weapon/reagent_containers/food/snacks/mint/syndiemint = 50)
 
 /obj/item/weapon/storage/pill_bottle/syndiemints/New()
+	..()
+	overlays = null //no overlay fuck you
+
 	switch(rand(3))
 		if(0)
 			name = "NanoFresh"
@@ -382,6 +385,30 @@ var/global/list/bottle_colour_choices = list("Blue" = "#0094FF","Dark Blue" = "#
 			items_to_spawn = list(/obj/item/weapon/reagent_containers/food/snacks/mint/syndiemint/homemade = 50)
 	..()
 
+/obj/item/weapon/storage/pill_bottle/mint
+	name = "You shouldn't be seeing this Mints!"
+	desc = "The lastest hip mint sensation in you shouldn't be seeing this! Tell your nearest poopmin(t)."
+	icon = 'icons/obj/candymachine.dmi'
+	storage_slots = 50
+
+/obj/item/weapon/storage/pill_bottle/mint/discount
+	name = "Discount Dan's Minty Delight"
+	desc = "Toxin 'Free'!"
+	icon_state = "mintboxgeneric"
+	items_to_spawn = list(/obj/item/weapon/reagent_containers/food/snacks/mint/syndiemint/discount/safe = 50)
+
+/obj/item/weapon/storage/pill_bottle/mint/nano
+	name = "NanoFresh"
+	desc = "An explosion of freshness in each candy!"
+	icon_state = "mintboxnanotrasen"
+	items_to_spawn = list(/obj/item/weapon/reagent_containers/food/snacks/mint/syndiemint/nano/safe = 50)
+
+/obj/item/weapon/storage/pill_bottle/mint/homemade
+	name = "Uncle Ian's homemade mints"
+	desc = "Graphic Design is my passion!"
+	icon_state = "mintboxgraphicdesign"
+	items_to_spawn = list(/obj/item/weapon/reagent_containers/food/snacks/mint/syndiemint/homemade/safe = 50)
+
 /obj/item/weapon/storage/pill_bottle/lollipops
 	name = "bag of lollipops"
 	desc = "Ha, sucker!"
@@ -393,19 +420,6 @@ var/global/list/bottle_colour_choices = list("Blue" = "#0094FF","Dark Blue" = "#
 	items_to_spawn = list(/obj/item/weapon/reagent_containers/food/snacks/lollipop = 4)
 
 /obj/item/weapon/storage/pill_bottle/lollipops/New()
-	..()
-	overlays = null
-
-/obj/item/weapon/storage/pill_bottle/zambiscuits
-	name = "Zam Biscuit Package"
-	desc = "A package of Zam biscuits, popular fare for hungry grey laborers. They go perfectly with a cup of Earl's Grey tea. "
-	icon = 'icons/obj/food_container.dmi'
-	icon_state = "zambiscuits"
-	storage_slots = 3
-	can_only_hold = list("/obj/item/weapon/reagent_containers/food/snacks/zambiscuit", "/obj/item/weapon/reagent_containers/food/snacks/zambiscuit_radical")
-	items_to_spawn = list(/obj/item/weapon/reagent_containers/food/snacks/zambiscuit = 3)
-
-/obj/item/weapon/storage/pill_bottle/zambiscuits/New()
 	..()
 	overlays = null
 
