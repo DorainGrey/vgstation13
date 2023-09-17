@@ -154,8 +154,9 @@
 	if(thermal_energy < 0)
 		if(temperature <= min_temp)
 			return 0
-		thermal_energy = max(thermal_energy, (min_temp - temperature) * heat_capacity) //ensure temperature does not go below min_temp. thermal_energy is negative here.
-	temperature += thermal_energy / heat_capacity
+		var/thermal_energy_limit = -(temperature - min_temp) * heat_capacity	//ensure temperature does not go below min_temp
+		thermal_energy = max(thermal_energy, thermal_energy_limit)	//thermal_energy and thermal_energy_limit are negative here.
+	temperature += thermal_energy/heat_capacity
 	return thermal_energy
 
 
@@ -210,7 +211,7 @@
 	for(var/g in gas)
 		var/moles = gas[g]
 		if(moles)
-			total_moles += moles
+			total_moles += gas[g]
 		else
 			gas -= g
 

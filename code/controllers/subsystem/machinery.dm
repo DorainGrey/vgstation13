@@ -11,11 +11,11 @@ var/list/machines = list()
 	display_order = SS_DISPLAY_MACHINERY
 
 	var/list/currentrun
-	var/currentrun_index
+
 
 /datum/subsystem/machinery/New()
 	NEW_SS_GLOBAL(SSmachinery)
-	currentrun = list()
+
 
 /datum/subsystem/machinery/stat_entry(var/msg)
 	if (msg)
@@ -23,20 +23,19 @@ var/list/machines = list()
 
 	..("M:[global.machines.len]")
 
+
 // This is to allow the near identical fast machinery process to use it.
 /datum/subsystem/machinery/proc/get_currenrun()
-	currentrun_index = machines.len
 	return machines.Copy()
+
 
 /datum/subsystem/machinery/fire(resumed = FALSE)
 	if (!resumed)
 		currentrun = get_currenrun()
 
-	var/obj/machinery/M
-	var/c = currentrun_index
-	while (c)
-		M = currentrun[c]
-		c--
+	while (currentrun.len)
+		var/obj/machinery/M = currentrun[currentrun.len]
+		currentrun.len--
 
 		if (!M || M.gcDestroyed || M.timestopped)
 			continue
@@ -50,6 +49,4 @@ var/list/machines = list()
 			M.auto_use_power()
 
 		if (MC_TICK_CHECK)
-			break
-
-	currentrun_index = c
+			return
